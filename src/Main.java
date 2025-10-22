@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -20,11 +22,24 @@ public class Main {
             System.out.println("Period: " + period);
             b.printPeriod(period);
             period++;
-            System.out.println(" ");
+            System.out.println();
         }
 
-        b.printPeriod(4);
+        // test case 1
         System.out.println(b.makeAppointment(2, 4, 22));
+        System.out.println("Test Case 1");
+        System.out.println();
         b.printPeriod(4);
+
+        // test case 2
+        System.out.println(b.makeAppointment(3, 4, 3));
+        System.out.println("Test Case 2");
+        System.out.println();
+        b.printPeriod(3);
+
+        // test case 3
+        System.out.println(b.makeAppointment(2, 4, 30));
+        System.out.println("Test Case 3");
+        System.out.println();
     }
 }
