@@ -1,45 +1,26 @@
-import java.sql.SQLOutput;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
-        boolean[][] schedule = new boolean[8][60];
-        AppointmentBook a = new AppointmentBook(schedule);
-        for (int i = 10; i < 15; i++) schedule[1][i] = true;
-        a.printPeriod(2);
-        System.out.println(" ");
+    }
+    public static int read() throws FileNotFoundException {
+        int requests = 0;
 
-        schedule = new boolean[8][60];
-        for(int i = 25; i < 30; i++) schedule[1][i] = true;
-        for(int i = 0; i < 15; i++) schedule[2][i] = true;
-        for(int i = 41; i < 60; i++) schedule[2][i] = true;
-        for(int i = 5; i < 30; i++) schedule[3][i] = true;
-        for(int i = 44; i < 60; i++) schedule[3][i] = true;
-        AppointmentBook b = new AppointmentBook(schedule);
+        File f = new File("Schedules.txt");
+        Scanner s = new Scanner(f);
+        while(s.hasNextLine()) {
+            boolean[][] schedule = new boolean[8][60];
+            for(int period = 0; period < 7; period++) {
+                for(int minute = 0; minute < 59; minute++) {
+                    schedule[period][minute] = s.nextBoolean();
+                }
+            }
+            AppointmentBook book = new AppointmentBook(schedule);
+            book.makeAppointment(s.nextInt(), s.nextInt(), s.nextInt());
 
-        int period = 2;
-        while(period < 5) {
-            System.out.println("Period: " + period);
-            b.printPeriod(period);
-            period++;
-            System.out.println();
         }
-
-        // test case 1
-        System.out.println(b.makeAppointment(2, 4, 22));
-        System.out.println("Test Case 1");
-        System.out.println();
-        b.printPeriod(4);
-
-        // test case 2
-        System.out.println(b.makeAppointment(3, 4, 3));
-        System.out.println("Test Case 2");
-        System.out.println();
-        b.printPeriod(3);
-
-        // test case 3
-        System.out.println(b.makeAppointment(2, 4, 30));
-        System.out.println("Test Case 3");
-        System.out.println();
     }
 }
