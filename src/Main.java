@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-
+        System.out.println(read());
     }
     public static int read() throws FileNotFoundException {
         int requests = 0;
@@ -13,14 +13,17 @@ public class Main {
         Scanner s = new Scanner(f);
         while(s.hasNextLine()) {
             boolean[][] schedule = new boolean[8][60];
-            for(int period = 0; period < 7; period++) {
-                for(int minute = 0; minute < 59; minute++) {
-                    schedule[period][minute] = s.nextBoolean();
+            for(int period = 0; period < 8; period++) {
+                for(int minute = 0; minute < 60; minute++) {
+                    boolean b = s.nextBoolean();
+                    System.out.print(b + " ");
+                    schedule[period][minute] = b;
                 }
             }
             AppointmentBook book = new AppointmentBook(schedule);
-            book.makeAppointment(s.nextInt(), s.nextInt(), s.nextInt());
+            if (book.makeAppointment(s.nextInt(), s.nextInt(), s.nextInt())) requests++;
 
         }
+        return requests;
     }
 }
